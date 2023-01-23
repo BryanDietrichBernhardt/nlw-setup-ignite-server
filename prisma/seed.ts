@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+
 const prisma = new PrismaClient();
 
 const firstHabitId = "0730ffac-d039-4194-9571-01aa2aa0efbd";
@@ -11,6 +12,8 @@ const thirdHabitId = "fa1a1bcf-3d87-4626-8c0d-d7fd1255ac00";
 const thirdHabitCreationDate = new Date("2023-01-08T03:00:00.000");
 
 async function run() {
+  await prisma.dayHabit.deleteMany();
+  await prisma.habitWeekDays.deleteMany();
   await prisma.habit.deleteMany();
   await prisma.day.deleteMany();
 
@@ -83,7 +86,7 @@ async function run() {
         date: new Date("2023-01-06T03:00:00.000z"),
         dayHabits: {
           create: {
-            habit_id: firstHabitId,
+            habit_id: secondHabitId,
           },
         },
       },
